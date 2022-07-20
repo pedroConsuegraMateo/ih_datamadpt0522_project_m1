@@ -2,10 +2,11 @@ from modules import connections as c
 from modules import geo_calculations as gc
 from modules import points_and_distances as pad
 from modules import main_table as mt
+from modules import map_generator as mp
+
 
 import argparse
 from fuzzywuzzy import process
-import folium
 
 def argument_parser():
     
@@ -28,12 +29,16 @@ if __name__ == '__main__':
     centros = c.centros_atencion_medica()
     bicimad = c.bicimad_connection()
     
+    centros = centros.head(10)
+    #bicimad = bicimad
+    
     start_points = pad.start_points(centros)
     finish_points = pad.finish_points(bicimad)
+    
     distancias = [pad.min_distance(i,finish_points) for i in start_points]
     
-    main_table = mt.main_table(centros, bicimad, distancias)
-    
+    main_table_extras = mt.main_table_with_extras(centros, bicimad, distancias, start_points, finish_points)
+    main_table = mt.main_table(main_table_extras)
     
     if argument_parser().function == 'all':
         main_table.to_csv('./data/main_table.csv')
@@ -47,7 +52,10 @@ if __name__ == '__main__':
             print('No se ha encontrado ninguna coincidencia.')
         else:
             
-            main_table = main_table[main_table['Place of Interest'] == nombre]      
+            main_table = main_table[main_table['Place of Interest'] == nombre]
+            main_table_extras_data = main_table_extras[main_table_extras['title'] == nombre]
+            print(main_table_extras_data)
+            mp.map_generator(main_table_extras_data)
             nombre = nombre.replace(' ', '_')
             main_table.to_csv(f'./data/{nombre}.csv')
         

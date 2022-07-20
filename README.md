@@ -1,102 +1,54 @@
-<p align="left"><img src="https://cdn-images-1.medium.com/max/184/1*2GDcaeYIx_bQAZLxWM4PsQ@2x.png"></p>
+# Proyecto Módulo 1
 
-# __ih_datamadpt0522_project_m1__
-
-Ironhack Madrid - Data Analytics Part Time - May 2022 - Project Module 1
-
-## **Data:**
-
-There are 2 main datasources:
-
-- **MySQL Online Database.** The database contains information from the BiciMAD stations including their location (i.e.: latitude / longitude). In order to access the database you may need the following credentials:
-```
-Server:        SERVER_IP
-Database:      BiciMAD
-```
-> __IMPORTANT =>__ Username and password will be provided in class.
+El objetivo de este proyecto es la creación de una tabla que nos devuelva la estación de BiciMAD más cercana a cada Centro Médico de la Comunidad de Madrid; o bien la estación BiciMAD más cercana a un centro médico que introduzca el usuario. 
 
 
-- **API REST.** We will use the API REST from the [Portal de datos abiertos del Ayuntamiento de Madrid](https://datos.madrid.es/nuevoMadrid/swagger-ui-master-2.2.10/dist/index.html?url=/egobfiles/api.datos.madrid.es.json#/), where you can find the __Catálogo de datos__ with more than 70 datasets. The API endpoint is `https://datos.madrid.es/egob`. 
+## Librerías Usadas
 
-> __IMPORTANT =>__ Specific datasets will be assigned to each student in order to perform the challenges.
+- sqlalchemy - Para el acceso a la base de datos de BiciMAD
+- requests - Para el acceso a los datos de los centros de atención médica del ayuntamiento de Madrid
+- pandas
+- argparse
+- geopandas & shapely.geometry - Para el cálculo de distancias
+- fuzzywuzzy - Para mejorar y facilitar la experiencia del usuario
+- folium - Para generar mapas
 
+## Módulos
 
----
+El proyecto consta de 4 módulos y el script principal. Los 4 módulos son los siguientes:
 
-## **Main Challenge:**
+### connections.py
 
-You must create a Python App (**Data Pipeline**) that allow their potential users to find the nearest BiciMAD station to a set of places of interest using the methods included in the module `geo_calculations.py`. The output table should look similar to:
+Incluye las dos funciones necesarias para la recogida de datos. 
 
-| Place of interest | Type of place (*) | Place address | BiciMAD station | Station location |
-|---------|----------|-------|------------|----------|
-| Auditorio Carmen Laforet (Ciudad Lineal)   | Centros Culturales | Calle Jazmin, 46 | Legazpi | Calle Bolívar, 3 |
-| Centro Comunitario Casino de la Reina | Centros municipales de enseñanzas artísticas | Calle Casino, 3 | Chamartin | Calle Rodríguez Jaén, 40 |
-| ...     | ...            | ...        | ...      | ...        |
-> __(*)__ There is a list of datasets each one with different places. A specific dataset will be assigned to each student. 
+- bicimad_connection: conecta con la base de datos de bicimad, devuelve una tabla de 
+- centros_atencion_medica: conecta con los datos de los centros de atención médica de Madrid. Devuelve una tabla de pandas
 
+### geo_calculations.py
 
-**Your project must meet the following requirements:**
+Incluye las dos funciones que calcularán las distancias reales entre dos puntos de coordenadas que reciban.
 
-- It must be contained in a GitHub repository which includes a README file that explains the aim and content of your code. You may follow the structure suggested [here](https://github.com/potacho/data-project-template).
+- to_mercator: recibe una coordenada de latitud y otra de longitud. Transforma el par latitud-longitud que recibe a un par  equivalente en un plano. Es utilizada por la función distance_meters
+- distance_meters: recibe dos pares de coordenadas(4 floats). Calcula la distancia entre dos pares de coordenadas que recibe. Devuelve un float.
 
-- It must create, at least, a `.csv` file including the requested table (i.e. Main Challenge). Alternatively, you may create an image, pdf, plot or any other output format that you may find convenient. You may also send your output by e-mail, upload it to a cloud repository, etc. 
+### points_and_distances.py
 
-- It must provide, at least, two options for the final user to select when executing using `argparse`: **(1)** To get the table for every 'Place of interest' included in the dataset (or a set of them), **(2)** To get the table for a specific 'Place of interest' imputed by the user.
+Incluye las funciones necesarias para obtener la distancia entre un centro y la parada más cercana a ese centro.
 
-**Additionally:**
+- start_points: recibe el dataframe de los centros. Devuelve un list de tuplas. Cada tupla es un par de coordenadas que representa cada centro médico.
+- finish_points: recibe el dataframe de las paradas de BiciMAD. Devuleve un list de tuplas donde cada tupla es un par de coordenadas que representa cada parada.
+- min_distance: recibe un start_point y el list con todos los finish_points. Calcula el par de coordenadas cuya distancia al start_point que recibe es la menor. Devuelve una tupla formada por ese par de distancia óptima y la distancia calculada.
 
-- You must prepare a 4 minutes presentation (ppt, canva, etc.) to explain your project (Instructors will provide further details about the content of the presentation).
+### main_table.py
 
-- The last slide of your presentation must include your candidate for the **'Ironhack Data Code Beauty Pageant'**. 
+Consta de dos funciones que se encargan de crear la tabla principal y otra con 5 columnas más que corresponden a las coordenadas de cada parada y cada centro; y las distancias entre ellos.
 
-
----
-
-### **Bonus 1:**
-
-You may include in your table the availability of bikes in each station.
-
----
-
-### **Bonus 2:**
-
-You may improve the usability of your app by using [FuzzyWuzzy](https://pypi.org/project/fuzzywuzzy/).
-
----
-
-### **Bonus 3:**
-
-Feel free to enrich your output data with any data you may find relevant (e.g.: wiki info for every place of interest) or connect to the BiciMAD API and update bikes availability realtime or find a better way to calculate distances...there's no limit!!!
-
---- 
-
-## **Project Main Stack**
-
-- [DBeaver](https://dbeaver.io/)
-
-- [SQL Alchemy](https://docs.sqlalchemy.org/en/13/intro.html)
-
-- [Requests](https://requests.readthedocs.io/)
-
-- [Pandas](https://pandas.pydata.org/pandas-docs/stable/reference/index.html)
-
-- Module `geo_calculations.py`
-
-- [Argparse](https://docs.python.org/3.7/library/argparse.html)
+- main_table_with_extras: recibe el dataframe de los centros, una lista con sus coordenadas, un dataframe de las paradas, una lista con sus coordenadas y las distancias.
+- main_table: recibe la tabla con los extras. Devuelve un dataframe con las columnas pedidas.
 
 
+## Pain Points:
 
-
-
-
-
-
-
-
-
-
+- velocidad de cálculo de distancias. primer método fallido.
+- problema para crear mapas con la lista de coordenadas de las paradas. Puede resultar confusa la solución.
  
-
-
- 
-

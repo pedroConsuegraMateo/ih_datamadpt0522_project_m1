@@ -47,4 +47,3 @@ def min_distance(start_point, finish_points):
         
     return index_distance
 
-# Función para guardar distancias

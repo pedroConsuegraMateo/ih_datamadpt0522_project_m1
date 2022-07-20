@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_215a87962b023fbfc57e8835e46a367c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_215a87962b023fbfc57e8835e46a367c" ></div>
+        
+</body>
+<script>    
+    
+            var map_215a87962b023fbfc57e8835e46a367c = L.map(
+                "map_215a87962b023fbfc57e8835e46a367c",
+                {
+                    center: [40.416948896201355, -3.7038645330446434],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_eb25e78abedb070726ca8c8ea0e8e2fd = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_215a87962b023fbfc57e8835e46a367c);
+        
+    
+            var marker_8db03454a471475fa90335f45c4fe98a = L.marker(
+                [40.429706, -3.640994],
+                {}
+            ).addTo(map_215a87962b023fbfc57e8835e46a367c);
+        
+    
+            var icon_070ad3426e0c8b8c8b81fdf07492c80a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bicycle", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_8db03454a471475fa90335f45c4fe98a.setIcon(icon_070ad3426e0c8b8c8b81fdf07492c80a);
+        
+    
+        var popup_678ae5780e0c83f3d3aacfe288751478 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d817dc1d8314c6031944f3294dd0662d = $(`<div id="html_d817dc1d8314c6031944f3294dd0662d" style="width: 100.0%; height: 100.0%;">2    165 - Entrada Matadero Name: parada, dtype: object</div>`)[0];
+            popup_678ae5780e0c83f3d3aacfe288751478.setContent(html_d817dc1d8314c6031944f3294dd0662d);
+        
+
+        marker_8db03454a471475fa90335f45c4fe98a.bindPopup(popup_678ae5780e0c83f3d3aacfe288751478)
+        ;
+
+        
+    
+    
+            var marker_730c0a8b2e43aa013692196f3a8cec06 = L.marker(
+                [40.39305745803064, -3.6165885100628414],
+                {}
+            ).addTo(map_215a87962b023fbfc57e8835e46a367c);
+        
+    
+            var icon_9f750c16d8684ecde04330705c6ba357 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_730c0a8b2e43aa013692196f3a8cec06.setIcon(icon_9f750c16d8684ecde04330705c6ba357);
+        
+    
+        var popup_7c9a477359e54dccee4a3de11ba012cc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_62e7fb763c4b05a40bf8f1c89628ba2e = $(`<div id="html_62e7fb763c4b05a40bf8f1c89628ba2e" style="width: 100.0%; height: 100.0%;">2    Centro de Atención a las Adicciones (CAD) de A... Name: title, dtype: object</div>`)[0];
+            popup_7c9a477359e54dccee4a3de11ba012cc.setContent(html_62e7fb763c4b05a40bf8f1c89628ba2e);
+        
+
+        marker_730c0a8b2e43aa013692196f3a8cec06.bindPopup(popup_7c9a477359e54dccee4a3de11ba012cc)
+        ;
+
+        
+    
+</script>
