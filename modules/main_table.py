@@ -20,9 +20,9 @@ def main_table_with_extras(centros, bicimad, distancias, start_points, finish_po
         centros ['distancia (m)'].loc[i] = distancias[i][1]
         
         centros['latitud_centro'].loc[i] = start_points[i][0]
-        centros['longitud_centro'] = start_points[i][1]
-        centros['latitud_parada'] =  finish_points[distancias[i][0]][1]
-        centros['longitud_parada'] = finish_points[distancias[i][0]][0]
+        centros['longitud_centro'].loc[i] = start_points[i][1]
+        centros['latitud_parada'].loc[i] =  finish_points[distancias[i][0]][1]
+        centros['longitud_parada'].loc[i] = finish_points[distancias[i][0]][0]
 
     main_table_extra = centros[['title','address.street-address','parada','dirección parada', 'distancia (m)', 'latitud_centro', 'longitud_centro', 'latitud_parada', 'longitud_parada']]
     #main_table_extra = main_table_extra.rename({'title': 'Place of Interest', 'address.street-address':'Place Address', 'parada':'BiciMAD Station', 'dirección parada':'Station Location', 'distancia (m)':'distance (m)'}, axis=1)

@@ -1,20 +1,16 @@
 import folium
 import pandas
 
-def map_generator(centro_parada):
+def map_generator(main_table_extras):
     
-    print(centro_parada['latitud_parada'])
-    print(centro_parada['longitud_parada'])
-    print(centro_parada['latitud_centro'])
-    print(centro_parada['longitud_centro'])
     
     map = folium.Map(location=[40.416948896201355, -3.7038645330446434], zoom_start=12)
-    folium.Marker(location=[centro_parada['latitud_parada'], centro_parada['longitud_parada']],
-                  popup=centro_parada['parada'],
+    folium.Marker(location=[main_table_extras['latitud_parada'] , main_table_extras['longitud_parada']],
+                  popup=main_table_extras['parada'],
                   icon=folium.Icon(icon="bicycle", prefix='fa', color='red')).add_to(map)
     
-    folium.Marker(location=[centro_parada['latitud_centro'], centro_parada['longitud_centro']],
-                  popup=centro_parada['title'],
+    folium.Marker(location=[main_table_extras['latitud_centro'], main_table_extras['longitud_centro']],
+                  popup=main_table_extras['title'],
                   icon=folium.Icon(icon="home", prefix='fa', color='blue')).add_to(map)
     
     map.save('place.html')
