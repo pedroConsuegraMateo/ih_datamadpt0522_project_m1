@@ -1,6 +1,8 @@
 # Proyecto Módulo 1
 
-El objetivo de este proyecto es la creación de una tabla que nos devuelva la estación de BiciMAD más cercana a cada Centro Médico de la Comunidad de Madrid; o bien la estación BiciMAD más cercana a un centro médico que introduzca el usuario. 
+El objetivo de este proyecto es la creación de una tabla que nos devuelva la estación de BiciMAD más cercana a cada Centro Médico de la Comunidad de Madrid; o bien la estación BiciMAD más cercana a un centro médico que introduzca el usuario.
+
+![diagrama_flujo](./images/diagrama_flujo.jpg)
 
 
 ## Requeriments y Librerías Usadas
@@ -68,8 +70,11 @@ El script incorpora una mejora para que en el caso de escribir mal el centro bus
 
 El pipeline tambien es capaz de generar un mapa en código html con la ubicación del centro y de la parada en el caso de que busquemos un centro concreto.
 
-## Pain Points:
+### Pain Points:
 
-- velocidad de cálculo de distancias. El primer método tardaba demasiada .
-- hubo un problema con la función de generar mapa. La función creaba un mapa con unos puntos de coordenadas que no se correspondían con los introducidos por el usuario a pesar de que en el dataframe que en un principio recibía ese registro ya no existía. La solución temporal aportada por el profesor consiste en extraer los datos necesarios y mandárselos a la función en lugar de mandar un dataframe. 
+- velocidad de cálculo de distancias. El primer método tardaba demasiado.
+- hubo un problema con la función de generar mapa. La función creaba un mapa con unos puntos de coordenadas que no se correspondían con los introducidos por el usuario a pesar de que en el dataframe que en un principio recibía ese registro ya no existía. El error estaba en la función de la creación de la tabla con los extras, la lógica estaba mal.
  
+ ### Extracto de código
+
+ ![code](./images/codesample.jpg)
