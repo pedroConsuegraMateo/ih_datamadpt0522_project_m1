@@ -29,7 +29,7 @@ if __name__ == '__main__':
     centros = c.centros_atencion_medica()
     bicimad = c.bicimad_connection()
     
-    centros = centros.head(10)
+    centros = centros
     
     start_points = pad.start_points(centros)
     finish_points = pad.finish_points(bicimad)
