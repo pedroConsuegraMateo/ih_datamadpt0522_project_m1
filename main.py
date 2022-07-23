@@ -59,5 +59,5 @@ if __name__ == '__main__':
             nombre = nombre.replace(' ', '_')
             main_table.to_csv(f'./data/{nombre}.csv')
         
-    print('Finished!')
+    print('Finished!!')
     
